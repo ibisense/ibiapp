@@ -1,0 +1,48 @@
+{
+    "template": {
+        "folder_structure": {
+           "javascripts": "js",
+           "stylesheets": "css",
+           "images": "img",
+           "index_file": "index.html"
+        },
+        "libraries": [
+            {
+                "include_order": 1,
+                "name": "jquery",
+                "url": "http://code.jquery.com/jquery-1.9.1.min.js",
+                "lib": "jquery-1.9.1.min.js"
+            },
+            {
+                "include_order": 2,
+                "name": "ibisense.api",
+                "url": "https://apps.ibisense.net/lib/ibisense-1.2.4.js",
+                "lib": "ibisense-1.2.4.js"
+            },
+            {
+                "include_order": 3,
+                "name": "bootstrap",
+                "url": "http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js",
+                "lib": "bootstrap.min.js"
+            },
+            {
+                "include_order": 4,
+                "name": "flot",
+                "url": "http://www.flotcharts.org/javascript/jquery.flot.min.js",
+                "lib": "jquery.flot.min.js"
+            },
+        ],
+        "stylesheets": [
+            {
+                "include_order": 1,
+                "name": "bootstrap-combined",
+                "url": "http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css",
+                "lib": "bootstrap-combined.min.css"
+            }
+        ],
+        "index_page": "template.html"
+    },
+    "ibiapp": {
+        "store_credentials": false
+    }
+}

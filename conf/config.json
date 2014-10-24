@@ -1,0 +1,30 @@
+{
+    "template": {
+        "folder_structure": {
+           "javascripts": "js",
+           "stylesheets": "css",
+           "images": "img",
+           "index_file": "index.html"
+        },
+        "libraries": [
+            {
+                "include_order": 1,
+                "name": "jquery",
+                "url": "http://code.jquery.com/jquery-1.9.1.min.js",
+                "lib": "jquery-1.9.1.min.js"
+            },
+            {
+                "include_order": 2,
+                "name": "ibisense.api",
+                "url": "https://apps.ibisense.net/lib/ibisense-1.2.1.js",
+                "lib": "ibisense-1.2.1.js"
+            }
+        ],
+        "stylesheets": [],
+        "index_page": "<!DOCTYPE html><html lang='en'><head><title>Ibisense template</title><meta charset='utf-8'>{{libraries}}{{stylesheets}}</head>{{body}}</html>",
+        "body": "<div></div>"
+    },
+    "ibiapp": {
+        "store_credentials": true
+    }
+}

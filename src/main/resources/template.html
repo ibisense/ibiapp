@@ -1,0 +1,71 @@
+ <!DOCTYPE html>
+ <html lang='en'>
+ 	<head>
+ 			<title>Ibisense template</title>
+ 			<meta charset='utf-8'>
+ 			{{libraries}}
+ 			{{stylesheets}}
+ 	</head>
+ 	<body>
+ 		<script>
+    		function onSuccess(dataset, status) {
+        		var arrayOftuples, i, date, value;
+        		if (status == 200) {
+            		$("#cuiddiv").append("Channel unique id: " + dataset.cuid());
+            		$("#starttimediv").append("Start time: " + dataset.startTime().toISOString());
+            		$("#endtimediv").append("End time: " + dataset.endTime().toISOString());
+            		$("#summarydiv").append("Timeseries summary (" +
+                		"min: " + dataset.summary("min") + ", " +
+                		"mean: " + dataset.summary("mean") + ", " +
+                		"max: " + dataset.summary("max") + ", " +
+                		"var: " + dataset.summary("var") + ", " +
+                		"count:" + dataset.summary("count") + ")");
+            		$.plot($("#datadiv"), [dataset.toRawArray()], { xaxis: { ticks: false } });
+        		}
+    		}
+
+    		function onError(status) {
+        		console.log("An error occured : " + status);
+    		}
+
+    		var apiKey = "635137e5a8bec2eecf06de10df28f6890e4d35194a1b9e59beb728997aad1c26";
+    		var cuid = "hqlu58rd";
+            var end = new Date();
+            var start = new Date(end.getTime() - 3*24*60*60*1000);
+    		var options = {
+        		cuid : cuid,
+        		start : start.toISOString(),
+        		end : end.toISOString(),
+        		func : "avg",
+        		interval : "3h"
+    		};
+
+    		ibisense.setApiKey(apiKey);
+ 
+    		ibisense.datapoints.get(options, onSuccess, onError);
+		</script>
+        <div style="margin-left: 30px">
+            <div align="center">        
+                <h2>Welcome to Ibisense Applications!</h2>
+            </div>
+            <div>
+                Demo: live temperature data  
+            </div>
+            <div id="cuiddiv">
+            </div>
+            <div id="starttimediv">
+            </div>
+            <div id="endtimediv">
+            </div>
+            <div id="summarydiv">
+            </div>
+            <div id="datadiv" style="width: 400px; height: 300px">
+            </div>
+            <div>
+                For mode information please see 
+                <a href="https://apps.ibisense.net/docs/">our API documentation page</a>
+            </div>
+        </div>
+ 	</body>
+ </html>
+        
