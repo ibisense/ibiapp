@@ -5,10 +5,10 @@ This repository contains IbiApp Java tool
 
 # Building 
 
-To build the tool you would need JDK (>= 1.7) and Maven build tool (>= 2.0)
+To build the tool you would need JDK (>= 1.7) and Maven build tool (>= 3.0)
 
 ```
-mvn2 assembly:assembly
+mvn3 package
 ```
 
 # Usage
@@ -33,7 +33,6 @@ Delete application:
 ```
 java -cp <path to ibiapp.jar>/ibiapp.jar com.ibisense.ibiapp.Main remove <application name>
 ```
-
 
 # TODO
 * Add ability to checkout application whose files does not exist locally but application is available in Ibisense Cloud
