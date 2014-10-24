@@ -1,8 +1,10 @@
-<project>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.ibisense</groupId>
 	<artifactId>ibiapp</artifactId>
-	<version>1.0.2</version>
+	<version>1.0.2-alpha</version>
+	<packaging>jar</packaging>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
@@ -134,63 +136,32 @@
 						<configFile>${project.basedir}/codequality/eclipse/eclipse.formatter.xml</configFile>
 					</configuration>
 				</plugin>
-				<!--This plugin's configuration is used to store Eclipse m2e settings 
-					only. It has no influence on the Maven build itself. -->
-				<plugin>
-					<groupId>org.eclipse.m2e</groupId>
-					<artifactId>lifecycle-mapping</artifactId>
-					<version>1.0.0</version>
-					<configuration>
-						<lifecycleMappingMetadata>
-							<pluginExecutions>
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>
-											com.googlecode.maven-java-formatter-plugin
-										</groupId>
-										<artifactId>
-											maven-java-formatter-plugin
-										</artifactId>
-										<versionRange>[0.3.1,)</versionRange>
-										<goals>
-											<goal>format</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<ignore></ignore>
-									</action>
-								</pluginExecution>
-							</pluginExecutions>
-						</lifecycleMappingMetadata>
-					</configuration>
-				</plugin>
 			</plugins>
 		</pluginManagement>
-		<!-- To use the plugin goals in your POM or parent POM -->
 		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
 				<configuration>
 					<archive>
 						<manifest>
+
 							<addClasspath>true</addClasspath>
 							<mainClass>com.ibisense.ibiapp.Main</mainClass>
 						</manifest>
+						<manifestEntries>
+							<Implementation-Build>${project.version}</Implementation-Build>
+							<Trusted-Library>true</Trusted-Library>
+						</manifestEntries>
 					</archive>
-				</configuration>
-			</plugin>
-			<plugin>
-				<artifactId>maven-assembly-plugin</artifactId>
-				<configuration>
-					<archive>
-						<manifest>
-							<mainClass>com.ibisense.ibiapp.Main</mainClass>
-						</manifest>
-					</archive>
-					<descriptorRefs>
-						<descriptorRef>jar-with-dependencies</descriptorRef>
-					</descriptorRefs>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -205,20 +176,65 @@
 				</configuration>
 				<executions>
 					<execution>
+						<phase>package</phase>
 						<goals>
 							<goal>format</goal>
 						</goals>
 					</execution>
 				</executions>
 			</plugin>
-
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<version>2.3</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+						<configuration>
+							<minimizeJar>true</minimizeJar>
+						</configuration>
+					</execution>
+				</executions>
 				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
+					<filters>
+						<filter>
+							<artifact>*:*</artifact>
+							<excludes>
+								<exclude>META-INF/*.SF</exclude>
+								<exclude>META-INF/*.DSA</exclude>
+								<exclude>META-INF/*.RSA</exclude>
+							</excludes>
+						</filter>
+						<filter>
+							<artifact>commons-logging:commons-logging</artifact>
+							<includes>
+								<include>org/apache/commons/logging/**/*</include>
+							</includes>
+						</filter>
+					</filters>
+					<!-- Additional configuration. -->
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>osxappbundle-maven-plugin</artifactId>
+				<version>1.0-alpha-1</version>
+				<configuration>
+					<bundleName>IbiApp</bundleName>
+					<mainClass>com.ibisense.ibiapp.Main</mainClass>
+					<jvmVersion>1.7+</jvmVersion>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>bundle</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
