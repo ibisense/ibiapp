@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.ibisense</groupId>
 	<artifactId>ibiapp</artifactId>
-	<version>1.0.2-alpha</version>
+	<version>1.0.2-alpha-0</version>
 	<packaging>jar</packaging>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -142,6 +142,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
+				
 				<configuration>
 					<source>1.7</source>
 					<target>1.7</target>
@@ -158,7 +159,7 @@
 							<mainClass>com.ibisense.ibiapp.Main</mainClass>
 						</manifest>
 						<manifestEntries>
-							<Implementation-Build>${project.version}</Implementation-Build>
+							<Implementation-Version>${project.version}</Implementation-Version>
 							<Trusted-Library>true</Trusted-Library>
 						</manifestEntries>
 					</archive>
@@ -218,7 +219,7 @@
 					<!-- Additional configuration. -->
 				</configuration>
 			</plugin>
-			<plugin>
+			<!--  plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>osxappbundle-maven-plugin</artifactId>
 				<version>1.0-alpha-1</version>
@@ -235,7 +236,7 @@
 						</goals>
 					</execution>
 				</executions>
-			</plugin>
+			</plugin -->
 		</plugins>
 	</build>
 </project>

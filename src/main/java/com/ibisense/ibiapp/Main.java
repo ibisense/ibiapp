@@ -9,7 +9,8 @@ import java.io.FileNotFoundException;
 
 public class Main {
 
-  final static String VERSION = "1.0.1";
+  final static String VERSION = Main.class.getPackage()
+      .getImplementationVersion();
 
   public static void help() {
     System.out
@@ -27,12 +28,14 @@ public class Main {
     System.out.println();
     System.out.println("Available commands are:");
     System.out
-        .println("   init    Initalizes application folder structure and");
-    System.out.println("           deploys it initial version to the cloud.");
-    System.out.println("   deploy  Deploys application to the cloud while");
-    System.out.println("           incrementing its version number.");
-    System.out.println("   remove  Removes application from the cloud while");
-    System.out.println("           keeping the local copy of the files.");
+        .println("   init     Initalizes application folder structure and");
+    System.out.println("            deploys it initial version to the cloud.");
+    System.out
+        .println("   checkout Checks out existing application from the Ibisense cloud ");
+    System.out.println("   deploy   Deploys application to the cloud while");
+    System.out.println("            incrementing its version number.");
+    System.out.println("   remove   Removes application from the cloud while");
+    System.out.println("            keeping the local copy of the files.");
     System.out.println();
     System.out.println("See 'java -jar ibiapp.jar help <command>' for more");
     System.out.println("information on a specific command.");
@@ -73,6 +76,19 @@ public class Main {
       System.out.println();
       System.out.println("Example:");
       System.out.println("java -jar ibiapp.jar deploy exampleapp");
+      System.exit(-1);
+    } else if (type.equals("checkout")) {
+      System.out
+          .println("checkout: Checks out application from the Ibisense cloud");
+      System.out.println();
+      System.out.println("usage: checkout [<application name>]");
+      System.out.println();
+      System.out.println("<application name> parameter is mandatory");
+      System.out
+          .println("if the application folder exists its contents will be overriden.");
+      System.out.println();
+      System.out.println("Example:");
+      System.out.println("java -jar ibiapp.jar checkout exampleapp");
       System.exit(-1);
     } else if (type.equals("remove")) {
       System.out.println("remove: Removes application from the cloud while");
@@ -158,7 +174,7 @@ public class Main {
         }
         String appNmae = commands[1];
         AppManager.init(baseDirectory, appNmae, config);
-      } else if (commands[0].equals("update")) {
+      } else if (commands[0].equals("checkout")) {
         System.out.println("Not implemented");
         System.exit(0);
       } else if (commands[0].equals("deploy")) {
