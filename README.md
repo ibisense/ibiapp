@@ -35,6 +35,6 @@ java -cp <path to ibiapp.jar>/ibiapp.jar com.ibisense.ibiapp.Main remove <applic
 ```
 
 # TODO
-* Add ability to checkout application whose files does not exist locally but application is available in Ibisense Cloud
+* Add ability to checkout application whose files do not exist locally, but an application is available in Ibisense Cloud
 * Add packaging for Mac OS, Windows and Linux
-* When username or password is wrong, the application must show corresponding error (currently it silently does nothing) 
+* When username and/or password are/is wrong, the application must show meaningful error (currently it silently does nothing) 
